@@ -99,6 +99,7 @@ func WritePrometheus(w io.Writer, exposeProcessMetrics bool) {
 func WriteProcessMetrics(w io.Writer) {
 	writeGoMetrics(w)
 	writeProcessMetrics(w)
+	writePushMetrics(w)
 }
 
 // WriteFDMetrics writes `process_max_fds` and `process_open_fds` metrics to w.
@@ -109,4 +110,9 @@ func WriteFDMetrics(w io.Writer) {
 // UnregisterMetric removes metric with the given name from default set.
 func UnregisterMetric(name string) bool {
 	return defaultSet.UnregisterMetric(name)
+}
+
+// ListMetricNames returns a list of all the metric names from default set.
+func ListMetricNames() []string {
+	return defaultSet.ListMetricNames()
 }
